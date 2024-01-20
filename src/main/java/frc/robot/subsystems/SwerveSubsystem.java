@@ -482,13 +482,10 @@ public class SwerveSubsystem extends SubsystemBase {
   }
   
   public void THISASUPERCOOLCHANGEIMADE() {
-    System.out.println("SAYYYY WHATTTTTT");
-    System.out.println("SAYYYY NAHaaaaaHH");
-        System.out.println("SAYYYY NAHHH");
 
   }
 
   public String notAcoolmethod() {
-    return new String();
+    return null;
   }
 }
