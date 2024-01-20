@@ -485,4 +485,8 @@ public class SwerveSubsystem extends SubsystemBase {
     System.out.println("SAYYYY WHATTTTTT");
     System.out.println("SAYYYY NAHHH");
   }
+
+  public String notAcoolmethod() {
+    return new String();
+  }
 }
