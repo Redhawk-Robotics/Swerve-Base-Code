@@ -28,11 +28,42 @@ import frc.robot.subsystems.SwerveSubsystem;
  */
 public class RobotContainer {
  // The robot's subsystems and commands are defined here...
-  private final SwerveSubsystem SwerveDrive  = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(),"swerve/neo"));
+private final SwerveSubsystem SwerveDrive = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(),"swerve/neo"));
 
 /* Controllers */
 private final XboxController DRIVER = new XboxController(Ports.Gamepad.DRIVER);
 private final XboxController OPERATOR = new XboxController(Ports.Gamepad.OPERATOR);
+
+ /* Driver Buttons */
+ private final Trigger driver_A_zeroGyro = new JoystickButton(DRIVER, XboxController.Button.kA.value);
+
+ private final Trigger dirver_x = new JoystickButton(DRIVER, XboxController.Button.kX.value);
+
+ private final Trigger driver_slowSpeed_rightBumper = new JoystickButton(DRIVER,
+     XboxController.Button.kRightBumper.value);
+
+ // Additional buttons
+ private final Trigger driver_leftBumper = new JoystickButton(DRIVER, XboxController.Button.kLeftBumper.value);
+
+ private final Trigger driver_B = new JoystickButton(DRIVER, XboxController.Button.kB.value);
+
+ private final Trigger driver_Y = new JoystickButton(DRIVER, XboxController.Button.kY.value);
+
+ private final Trigger driver_BottomRightRearButton = new JoystickButton(DRIVER,
+     XboxController.Button.kStart.value);
+ private final Trigger driver_BottomLeftRearButton = new JoystickButton(DRIVER,
+     XboxController.Button.kBack.value);
+
+ private final Trigger driver_TopRightRearButton = new JoystickButton(DRIVER,
+     XboxController.Button.kRightStick.value);
+
+ private final Trigger driver_START = new JoystickButton(DRIVER, XboxController.Button.kStart.value);
+ private final Trigger driver_BACK = new JoystickButton(DRIVER, XboxController.Button.kBack.value);
+
+ private final Trigger dpadUpButtonDrive = new Trigger(() -> DRIVER.getPOV() == 0);
+ private final Trigger dpadRightButtonDrive = new Trigger(() -> DRIVER.getPOV() == 90);
+ private final Trigger dpadDownButtonDrive = new Trigger(() -> DRIVER.getPOV() == 180);
+ private final Trigger dpadLeftButtonDrive = new Trigger(() -> DRIVER.getPOV() == 270);
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -76,7 +107,7 @@ AbsoluteDriveAdv closedAbsoluteDriveAdv = new AbsoluteDriveAdv(SwerveDrive,
     Command driveFieldOrientedDirectAngleSim = SwerveDrive.simDriveCommand(
         () -> MathUtil.applyDeadband(DRIVER.getLeftY(), OperatorConstants.LEFT_Y_DEADBAND),
         () -> MathUtil.applyDeadband(DRIVER.getLeftX(), OperatorConstants.LEFT_X_DEADBAND),
-        () -> DRIVER.getRawAxis(2));
+        () -> DRIVER.getRawAxis(2));//FIXME may need to comment due to simulation and latency
 
     SwerveDrive.setDefaultCommand(
         !RobotBase.isSimulation() ? driveFieldOrientedDirectAngle : driveFieldOrientedDirectAngleSim);
@@ -96,7 +127,8 @@ AbsoluteDriveAdv closedAbsoluteDriveAdv = new AbsoluteDriveAdv(SwerveDrive,
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
      // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
 
-    new JoystickButton(DRIVER, 1).onTrue((new InstantCommand(SwerveDrive::zeroGyro)));
+    driver_A_zeroGyro.onTrue(new InstantCommand(() -> SwerveDrive.zeroGyro()));
+    // new JoystickButton(DRIVER, 1).onTrue((new InstantCommand(SwerveDrive::zeroGyro)));
     //new JoystickButton(DRIVER, 3).whileTrue(new RepeatCommand(new InstantCommand(SwerveDrive::lock, SwerveDrive)));
     }
 
@@ -112,7 +144,7 @@ AbsoluteDriveAdv closedAbsoluteDriveAdv = new AbsoluteDriveAdv(SwerveDrive,
   }
   public void setDriveMode()
   {
-    // drivebase.setDefaultCommand();testad
+    // drivebase.setDefaultCommand();
   }
 
   public void setMotorBrake(boolean brake)
