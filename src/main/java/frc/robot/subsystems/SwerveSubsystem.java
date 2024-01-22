@@ -480,15 +480,4 @@ public class SwerveSubsystem extends SubsystemBase {
   {
     return swerveDrive.getPitch();
   }
-  
-  public void THISASUPERCOOLCHANGEIMADE() {
-
-  }
-
-  public String notAcoolmethod() {
-    return null;
-  }
-  public String notAcoolmethodssdasdadasdasdsa() {
-    return new String();
-  }
 }
