@@ -37,7 +37,7 @@ private final XboxController OPERATOR = new XboxController(Ports.Gamepad.OPERATO
  /* Driver Buttons */
  private final Trigger driver_A_zeroGyro = new JoystickButton(DRIVER, XboxController.Button.kA.value);
 
- private final Trigger dirver_x = new JoystickButton(DRIVER, XboxController.Button.kX.value);
+ private final Trigger driver_xlock = new JoystickButton(DRIVER, XboxController.Button.kX.value);
 
  private final Trigger driver_slowSpeed_rightBumper = new JoystickButton(DRIVER,
      XboxController.Button.kRightBumper.value);
@@ -128,6 +128,7 @@ AbsoluteDriveAdv closedAbsoluteDriveAdv = new AbsoluteDriveAdv(SwerveDrive,
      // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
 
     driver_A_zeroGyro.onTrue(new InstantCommand(() -> SwerveDrive.zeroGyro()));
+    driver_xlock.onTrue(new InstantCommand(()->SwerveDrive.lock()));
     // new JoystickButton(DRIVER, 1).onTrue((new InstantCommand(SwerveDrive::zeroGyro)));
     //new JoystickButton(DRIVER, 3).whileTrue(new RepeatCommand(new InstantCommand(SwerveDrive::lock, SwerveDrive)));
     }
